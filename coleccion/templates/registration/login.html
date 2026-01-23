@@ -1,0 +1,39 @@
+{% extends 'coleccion/base.html' %}
+
+{% block contenido %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-4">
+        <div class="card shadow bg-secondary text-white border-0">
+            <div class="card-header bg-black text-center">
+                <h4>🔐 Iniciar Sesión</h4>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Usuario</label>
+                        {{ form.username }} 
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Contraseña</label>
+                        {{ form.password }}
+                    </div>
+
+                    <button type="submit" class="btn btn-warning w-100 fw-bold">Entrar</button>
+                </form>
+            </div>
+            {% if form.errors %}
+                <div class="card-footer bg-danger text-center">
+                    Usuario o contraseña incorrectos
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<style>
+    input { width: 100%; padding: 8px; border-radius: 5px; border: none; }
+</style>
+{% endblock %}
