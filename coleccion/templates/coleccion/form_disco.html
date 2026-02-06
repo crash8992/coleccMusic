@@ -41,6 +41,15 @@
                         <div class="col-md-6">
                             <label class="form-label fw-bold">Género</label>
                             {{ form.genero }}
+                            <datalist id="listado-generos">
+                            {% for genero in generos %}
+                            <option value="{{ genero }}">
+                            {% endfor %}
+    </datalist>
+    
+    <div class="form-text text-light small">
+        * Empieza a escribir para ver géneros existentes.
+                            
                         </div>
                     </div>
 

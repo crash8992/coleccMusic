@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 import os
 import dj_database_url
@@ -121,6 +122,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = "static/"
+# ESTA ES LA LÍNEA QUE TE FALTA (Donde Render guardará los archivos)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Esto activa Whitenoise para servir los archivos en la nube
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Configuración para archivos multimedia (imágenes)
 MEDIA_URL = '/media/'
