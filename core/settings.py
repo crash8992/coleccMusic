@@ -79,9 +79,9 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 DATABASES = {
     'default': dj_database_url.config(
+        # Busca la variable DATABASE_URL, si no está, usa sqlite por defecto
         default=os.environ.get('DATABASE_URL'),
-        conn_max_age=600,
-        ssl_require=True  # Supabase a veces requiere esto
+        conn_max_age=600
     )
 }
 

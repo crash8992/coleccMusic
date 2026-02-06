@@ -1,0 +1,67 @@
+{% extends 'coleccion/base.html' %}
+
+{% block contenido %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card bg-secondary text-white shadow border-0">
+            <div class="card-header bg-black">
+                <h3 class="mb-0">📀 Nuevo Disco</h3>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Título del Álbum</label>
+                        {{ form.titulo }}
+                    </div>
+
+                    <div class="p-3 mb-3 bg-dark rounded border border-secondary">
+                        <label class="form-label fw-bold text-warning mb-3">🎤 Selección de Artista</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="small text-muted">Opción A: Elegir existente</label>
+                                {{ form.artista }}
+                            </div>
+                            <div class="col-md-6 border-start border-secondary">
+                                <label class="small text-muted">Opción B: ¿No está? Crea uno nuevo</label>
+                                {{ form.nuevo_artista }}
+                            </div>
+                        </div>
+                        <div class="form-text text-light mt-2 small">
+                            * Usa la Opción B solo si la banda no aparece en la lista de la izquierda.
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Año</label>
+                            {{ form.anio }}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Género</label>
+                            {{ form.genero }}
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Formato</label>
+                            {{ form.formato }}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Portada</label>
+                            {{ form.portada }}
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-warning fw-bold btn-lg">Guardar Disco</button>
+                        <a href="{% url 'lista_discos' %}" class="btn btn-dark">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
