@@ -14,7 +14,7 @@ class DiscoForm(forms.ModelForm):
 
     class Meta:
         model = Disco
-        fields = ['titulo', 'artista', 'nuevo_artista', 'anio', 'genero', 'formato', 'portada']
+        fields = ['titulo', 'artista', 'nuevo_artista', 'anio', 'genero', 'formato', 'portada', 'spotify_url']
         
         widgets = {
             'titulo': forms.TextInput(attrs={'class': 'form-control'}),
@@ -26,6 +26,9 @@ class DiscoForm(forms.ModelForm):
             'autocomplete': 'off' }),      # Apaga el autocompletado feo del navegador
             'formato': forms.Select(attrs={'class': 'form-select'}),
             'portada': forms.FileInput(attrs={'class': 'form-control'}),
+            'spotify_url': forms.URLInput(attrs={
+            'class': 'form-control', 
+            'placeholder': 'Ej: https://open.spotify.com/album/4m2880jivSbbyEG...'}),
         }
 
     def __init__(self, *args, **kwargs):

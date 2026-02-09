@@ -1,39 +1,62 @@
 {% extends 'coleccion/base.html' %}
 
 {% block contenido %}
-<h2 class="text-center mb-4">Mi Colección Musical</h2>
-<div class="text-center mb-4">
-    <a href="{% url 'crear_disco' %}" class="btn btn-success btn-lg shadow">
-        + Agregar Disco
-    </a>
-</div>
+<div class="container mt-4">
+    
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="text-white">🎵 Mi Colección</h1>
+        <a href="{% url 'crear_disco' %}" class="btn btn-success fw-bold">
+            + Nuevo Disco
+        </a>
+    </div>
 
-<div class="row row-cols-1 row-cols-md-3 g-4">
-    {% for disco in discos %}
-    <div class="col">
-        <div class="card h-100 bg-secondary text-white border-0 shadow">
-            {% if disco.portada %}
-                <img src="{{ disco.portada.url }}" class="card-img-top" alt="{{ disco.titulo }}" style="height: 300px; object-fit: cover;">
-            {% else %}
-                <div class="d-flex align-items-center justify-content-center bg-black" style="height: 300px;">
-                    <span class="fs-1">🎵</span>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for disco in discos %}
+        <div class="col">
+            <div class="card h-100 bg-dark text-white border-secondary shadow-lg">
+                
+                {% if disco.portada %}
+                    <img src="{{ disco.portada.url }}" class="card-img-top" alt="{{ disco.titulo }}" 
+                         style="height: 300px; object-fit: cover;">
+                {% else %}
+                    <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" 
+                         style="height: 300px;">
+                        <span class="text-white-50 fs-1">💿</span>
+                    </div>
+                {% endif %}
+
+                <div class="card-body">
+                    <h5 class="card-title fw-bold text-warning mb-0">{{ disco.titulo }}</h5>
+                    <p class="text-info mb-2">{{ disco.artista }}</p>
+                    
+                    <div class="mb-3">
+                        <span class="badge bg-secondary">{{ disco.anio }}</span>
+                        <span class="badge bg-primary">{{ disco.genero }}</span>
+                        <span class="badge bg-light text-dark">{{ disco.get_formato_display }}</span>
+                    </div>
+
+                    {% if disco.spotify_id %}
+                        <div class="mt-3 border-top border-secondary pt-3">
+                            <iframe style="border-radius:12px" 
+                                src="https://open.spotify.com/embed/album/{{ disco.spotify_id }}?utm_source=generator" 
+                                width="100%" 
+                                height="80" 
+                                frameBorder="0" 
+                                allowfullscreen="" 
+                                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                                loading="lazy">
+                            </iframe>
+                        </div>
+                    {% endif %}
                 </div>
-            {% endif %}
-
-            <div class="card-body">
-                <h5 class="card-title fw-bold">{{ disco.titulo }}</h5>
-                <p class="card-text mb-1">🎤 {{ disco.artista.nombre }}</p>
-                <p class="card-text">
-                    <small class="text-warning">{{ disco.anio }}</small> | 
-                    <span class="badge bg-dark">{{ disco.get_formato_display }}</span>
-                </p>
             </div>
         </div>
+        {% empty %}
+            <div class="col-12 text-center mt-5 text-white">
+                <h3>😔 No hay discos todavía</h3>
+                <p>¡Usa el botón verde para agregar el primero!</p>
+            </div>
+        {% endfor %}
     </div>
-    {% empty %}
-    <div class="col-12 text-center mt-5">
-        <p>Aún no hay discos en la colección.</p>
-    </div>
-    {% endfor %}
 </div>
 {% endblock %}
